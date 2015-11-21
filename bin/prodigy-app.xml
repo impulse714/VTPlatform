@@ -16,6 +16,9 @@
     <fullScreen>false</fullScreen>
     <aspectRatio>portrait</aspectRatio>
     <renderMode>auto</renderMode>
+    <maximizable>true</maximizable>
+    <minimizable>true</minimizable>
+    <resizable>true</resizable>
   </initialWindow>
   <icon>
     <image16x16>icons/16.png</image16x16>
