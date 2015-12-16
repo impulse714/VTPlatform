@@ -245,6 +245,7 @@ package  com.facential{
 		public function minimizeBoxer():void { // function to minimize the explaination box 
 			
 			theVideo.visible = false;
+			theVideo.pause();
 			bkgdBox.visible = false;
 			headerTextBox.visible = false;
 			bodyTextBox.visible = false;

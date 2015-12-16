@@ -35,7 +35,8 @@ package  com.facential {
 		var message1Button:Button;
 		var message2Button:Button;
 
-		public function messageBoxClass (_errorHeader:String,_errorMessage:String,_button1Label:String,_button2Label:String,_functionType:String){
+		public function messageBoxClass (_errorHeader:String,_errorMessage:String,_button1Label:String,
+										 _button2Label:String,_functionType:String){
 						
 			addEventListener(Event.ADDED_TO_STAGE, init);
 			errorHeader = _errorHeader;

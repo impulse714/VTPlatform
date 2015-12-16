@@ -43,6 +43,8 @@
 		  
 							
 		public function fileGetter (_array:Array) {
+			
+			trace("in filegetter "+_array);
 		
 			array = _array;
 			outerBkgdBox = new Shape; // initializing the first box

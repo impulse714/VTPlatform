@@ -68,13 +68,13 @@
 			clearDirectoryBtn.addEventListener(MouseEvent.CLICK, clearBtnHandeler);
 			spt.addChild(clearDirectoryBtn);
 			
-			downloadBtn = new Button();
+			/*downloadBtn = new Button();
 			downloadBtn.label = "Download Topics";
 			downloadBtn.width = 100;
 			downloadBtn.move(50,655);
 			downloadBtn.addEventListener(MouseEvent.CLICK, downloadHandeler);
 			if (dArray == null) downloadBtn.enabled = false;
-			spt.addChild(downloadBtn);
+			spt.addChild(downloadBtn);*/
 			
 			sbMinMaxBtn = new Button();
 			sbMinMaxBtn.toggle = true;
@@ -148,11 +148,11 @@
 			
 			
 		function downloadHandeler (e:MouseEvent):void {
-	
+			
 		    FACdownLoader = new fileGetter(dArray);
 			FACdownLoader.addEventListener("DOWNLOAD_IS_COMPLETE", downloadComplete);
-			FACdownLoader.x = 440;
-			FACdownLoader.y = 300;
+			FACdownLoader.x = 0;
+			FACdownLoader.y = 0;
 			addChild(FACdownLoader);
 		
 		} // end of logoHandeler

@@ -25,7 +25,7 @@ package  {
 	import flash.desktop.NativeApplication;
 	import air.net.*;
 
-	[SWF(width=1280,height=760, frameRate='60',backgroundColor="0x999999")]	
+	[SWF(width=1280,height=790, frameRate='60',backgroundColor="0x999999")]	
 	
 	public class Document extends MovieClip {
 		
@@ -81,14 +81,18 @@ package  {
 	} // end of init  (the constructor)
 	
 
-
 	function loggedIN (e:Event):void{ 
 	
 			SB = new sideBarClass(login.returnArray);
 			SB.x=1060;
 			top.addChild(SB);
 			
-			camMinMaxBtn = new Button();
+			var dl_btn:downLoad = new downLoad();
+			dl_btn.addEventListener(MouseEvent.CLICK, downloadHandeler);
+			if (login.returnArray == null) dl_btn.visible = false;
+			addChild(dl_btn);
+			
+			/*camMinMaxBtn = new Button();
    			camMinMaxBtn.label = "Deactivate camera and playback"; 
 			camMinMaxBtn.width = 300;
    			camMinMaxBtn.selected = true;    
@@ -96,7 +100,7 @@ package  {
   			camMinMaxBtn.addEventListener(MouseEvent.CLICK,camMinMax);
 			camMinMaxBtn.move(920,18);
 			camMinMaxBtn.visible = false;
-			bottom.addChild(camMinMaxBtn);
+			bottom.addChild(camMinMaxBtn);*/
 	
 			if (!webcamRecorder) {
 				
@@ -105,7 +109,7 @@ package  {
 				webcamRecorder.addEventListener("RECORD", onRecord);
 				webcamRecorder.addEventListener("SAVED", onFileSaved);
 				webcamRecorder.x = 860;
-				webcamRecorder.y = 50;
+				webcamRecorder.y = 30;
 				webcamRecorder.visible = false;
 				bottom.addChild(webcamRecorder);
 				
@@ -152,6 +156,25 @@ package  {
 			
 		
 		} // end of loggedIN
+		
+		
+		
+	function downloadHandeler (e:MouseEvent):void {
+			
+		FACdownLoader = new fileGetter(login.returnArray);
+		FACdownLoader.addEventListener("DOWNLOAD_IS_COMPLETE", downloadComplete);
+		FACdownLoader.x = 0;
+		FACdownLoader.y = 0;
+		addChild(FACdownLoader);
+		
+	} // end of logoHandeler
+			
+
+	function downloadComplete (e:Event):void {
+		
+		removeChild(FACdownLoader);
+	}
+			
 	
 		
 	private function processTopicFile (event:Event):void { // Processes the topic file 
@@ -192,23 +215,23 @@ package  {
 		
 			var dataObject:Object = {topicName:String,
 									 isEditable:String,
-									 viewTopicX:String,
-									 viewLessonX:String,
+									 viewTopicX:Boolean,
+									 viewLessonX:Boolean,
 									 topicType:String,
 									 Xheader:String,
 									 Xtext:String,
 		                        	 Xvideo:String,
-								 	lessons:Array,
-								 	Qheader:String, 
-								 	explanations:Array,
-								 	Qmovies:Array,
-								 	Pheader:String,
-								 	prompts:Array, 
-								 	Pmovies:Array,
-								 	RMheader:String,
-								 	responses:Array,
-								 	RMmovies:Array,
-								 	vrTakes:Array };
+								 	 lessons:Array,
+								 	 Qheader:String, 
+								 	 explanations:Array,
+								 	 Qmovies:Array,
+								 	 Pheader:String,
+								 	 prompts:Array, 
+								 	 Pmovies:Array,
+								 	 RMheader:String,
+								 	 responses:Array,
+								 	 RMmovies:Array,
+								 	 vrTakes:Array };
 								 
 		try {
 			
@@ -222,14 +245,30 @@ package  {
 				dataObject.isEditable = _isEditable;
 				
 			var _viewTopicX:String = event.target.data.viewTopicX;
-				dataObject.viewTopicX = _viewTopicX;
+			
+				if (_viewTopicX == "yes") {
+			
+					dataObject.viewTopicX = true;
+					
+				} else {
+			
+					dataObject.viewTopicX = false;
 				
-				if (_viewTopicX == "yes") viewTopicX = true;
+				}
+				
 								
 			var _viewLessonX:String = event.target.data.viewLessonX;
-				dataObject.viewLessonX = _viewLessonX;
+			
+				if (_viewLessonX == "yes") {
+			
+					dataObject.viewLessonX = true;
+					
+				} else {
+			
+					dataObject.viewLessonX = false;
 				
-				if (_viewLessonX == "yes") viewLessonX = true;
+				}			
+		
 
 			var _Xheader:String = event.target.data.Xheader;
 				dataObject.Xheader = _Xheader;	
@@ -286,7 +325,7 @@ package  {
 		lessons = new lessonClass(dataObject);
  		bottom.addChild(lessons);
 		
-		camMinMaxBtn.visible = true;
+		//camMinMaxBtn.visible = true;
 		webcamRecorder.lessonGlobalPrefix = lessons.getLessonPrefix();
 		webcamRecorder.visible = true;
 		if(playBack){
@@ -322,6 +361,7 @@ package  {
 			monitor.start();
 			
 	} // end of function checkInternetConnection
+	
 	
 	
 	private function onConnection (e:Event = null):void {

@@ -43,14 +43,14 @@ package  com.facential{
 			playbackCB.dropdownWidth = 330; 		  
 			playbackCB.dropdown.rowHeight = 22;
 			playbackCB.textField.height = 32;
-			playbackCB.move(890,387);
+			playbackCB.move(890,367);
 			playbackCB.prompt = "Select a your playback"; 
 			playbackCB.addEventListener(Event.CHANGE,playbackHandeler); 
 			addChild(playbackCB); // places the comboBox of all available lessons on the stage */
 			
 			
 			rehersalVideo.x = 890;
-			rehersalVideo.y = 445;
+			rehersalVideo.y = 425;
 			addChild(rehersalVideo);
 			rehersalVideo.addEventListener(VideoControlsEvent.STATE_UPDATE, onStateUpdate, false, 0, true);
         	rehersalVideo.controlsOverVideo = false;// position the videoplayer's controls at the bottom of the video

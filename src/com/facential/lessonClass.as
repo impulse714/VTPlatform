@@ -1,7 +1,7 @@
 ﻿/**********************************************************************************************************************************/
 /******           Class written by Tim Lanham   copyright Facential,LLC   2015  all rights reserved                           *****/
 /******           This is the main class file that controls the lessons. Most stage assetts are called                        *****/
-/******           from this class.      Last edit 11/5/15                                                                     *****/
+/******           from this class.      Last edit 11/25/15                                                                    *****/
 /******                                                                                                                       *****/
 /**********************************************************************************************************************************/
 
@@ -40,14 +40,15 @@ package  com.facential{
 		var cfile:File;
 		var lessonNumberSelected:int;
 		var rehearseMode:Boolean = false;
+		var lessonProgressBar:ProgressBar;
 
 		
-		public function lessonClass (_Tobj:Object) { // lessonClass constructor
+	public function lessonClass (_Tobj:Object) { // lessonClass constructor
 		   
-		   	Tobj = _Tobj;
-			addEventListener(Event.ADDED_TO_STAGE, init);
+		Tobj = _Tobj;
+		addEventListener(Event.ADDED_TO_STAGE, init);
 
-		} // end of constructor
+	} // end of constructor
 			
 			
 		private function init (evt:Event):void {
@@ -64,9 +65,9 @@ package  com.facential{
 			
 			if(loadBox3){loadBox3.removeBoxer(); removeChild(loadBox3); }
 			
- 			if(explainationBoxButton) {
+ 			if(explainationBoxButton) trace("**********************************");
 				
-				removeChild(explainationBoxButton);
+				/*removeChild(explainationBoxButton);
 				explainationBoxButton.removeEventListener(MouseEvent.CLICK, explainationButtonHandler);
 				removeChild(rehearseButton);
 				rehearseButton.removeEventListener(MouseEvent.CLICK, rehearseButtonHandler);
@@ -78,8 +79,9 @@ package  com.facential{
 				modulesCB.removeEventListener(Event.CHANGE,lessonHandeler);
 				xPlain.removeBoxer();
 				removeChild(xPlain);
+				removeChild(lessonProgressBar);
 				
-			} // end of if to remove assets
+			} // end of if to remove assets*/
 		
 			
 			for (var l:String in Tobj.vrTakes) { // converts takes to appPath 
@@ -139,6 +141,15 @@ package  com.facential{
 			prevButton.addEventListener(MouseEvent.CLICK, prevButtonHandler);
 			prevButton.enabled = false;
 			addChild(prevButton);
+			
+			lessonProgressBar = new ProgressBar();
+        	lessonProgressBar.x = 185;
+        	lessonProgressBar.y = 760;
+			lessonProgressBar.height = 20;
+			lessonProgressBar.width = 800;
+			lessonProgressBar.mode = ProgressBarMode.MANUAL;
+			lessonProgressBar.setProgress(0,Tobj.lessons.length);
+        	addChild(lessonProgressBar);
 	
 			xPlain = new boxerClass(Tobj.Xheader,Tobj.Xtext,xfile.url,0,"BIG"); // add new explaination to the stage
 			xPlain.x = 40;
@@ -196,8 +207,8 @@ package  com.facential{
 				xPlain.stopVideo();
 				if (loadBox1) loadBox1.restoreBoxer();
 				if (loadBox2) loadBox2.restoreBoxer();
-				if (loadBox3)  { loadBox3.restoreBoxer(); 
-			}
+				if (loadBox3) loadBox3.restoreBoxer(); 
+
 				
     		} else {
 				 
@@ -268,6 +279,7 @@ package  com.facential{
 			if(loadBox3)loadBox3.removeBoxer();
 			lessonMover(lessonNumberSelected +1);
 			lessonNumberSelected++;
+			trace("the lessonNumberSelected is "+(lessonNumberSelected-1));
 			modulesCB.prompt = Tobj.lessons[lessonNumberSelected]; 
 
 	 	} // end of nextButtonHandler
