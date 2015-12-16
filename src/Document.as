@@ -2,7 +2,7 @@
 /*****                       Prodigy application written by Tim Lanham   latest mod  11/20/2015                     ****/
 /*****                        Main document class for the application.                                              ****/
 /*****                    Copyright  Facential, LLC   2015   all rights reserved                                    ****/
-/*****                   This is now on github                                                                      ****/
+/*****                   This is now on github and all modification are now tracked.                                ****/
 /***********************************************************************************************************************/
 
 package  {
