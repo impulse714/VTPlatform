@@ -67,7 +67,7 @@ package  com.facential{
 			
  			if(explainationBoxButton) trace("**********************************");
 				
-				/*removeChild(explainationBoxButton);
+				removeChild(explainationBoxButton);
 				explainationBoxButton.removeEventListener(MouseEvent.CLICK, explainationButtonHandler);
 				removeChild(rehearseButton);
 				rehearseButton.removeEventListener(MouseEvent.CLICK, rehearseButtonHandler);
