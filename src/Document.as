@@ -87,6 +87,7 @@ package  {
 			SB.x=1060;
 			top.addChild(SB);
 			
+			
 			var dl_btn:downLoad = new downLoad();
 			dl_btn.addEventListener(MouseEvent.CLICK, downloadHandeler);
 			if (login.returnArray == null) dl_btn.visible = false;
