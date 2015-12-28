@@ -1,7 +1,7 @@
 ﻿/**********************************************************************************************************************************/
-/******           Class written by Tim Lanham   copyright Facential,LLC   2015  all rights reserved                           *****/
+/******           Class written by Tim Lanham   copyright Facential,LLC   2016  all rights reserved                           *****/
 /******           This is the main class file that controls the lessons. Most stage assetts are called                        *****/
-/******           from this class.      Last edit 11/25/15                                                                    *****/
+/******           from this class.      Last edit 12/22/15                                                                    *****/
 /******                                                                                                                       *****/
 /**********************************************************************************************************************************/
 
@@ -81,7 +81,7 @@ package  com.facential{
 				removeChild(xPlain);
 				removeChild(lessonProgressBar);
 				
-			} // end of if to remove assets*/
+			//} // end of if to remove assets*/
 		
 			
 			for (var l:String in Tobj.vrTakes) { // converts takes to appPath 
