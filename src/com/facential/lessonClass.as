@@ -65,7 +65,10 @@ package  com.facential{
 			
 			if(loadBox3){loadBox3.removeBoxer(); removeChild(loadBox3); }
 			
- 			if(explainationBoxButton) trace("**********************************");
+ 			if(explainationBoxButton) {
+			
+			
+				trace("**********************************");
 				
 				removeChild(explainationBoxButton);
 				explainationBoxButton.removeEventListener(MouseEvent.CLICK, explainationButtonHandler);
@@ -81,7 +84,7 @@ package  com.facential{
 				removeChild(xPlain);
 				removeChild(lessonProgressBar);
 				
-			//} // end of if to remove assets*/
+			} // end of if to remove assets*/
 		
 			
 			for (var l:String in Tobj.vrTakes) { // converts takes to appPath 

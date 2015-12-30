@@ -184,7 +184,7 @@ package  com.facential {
 			}else{
 				
 				var loader:URLLoader = new URLLoader();// create a URLLoader to POST data to the server
-				var request:URLRequest = new URLRequest("http://www.facential.com/facConn.php");
+				var request:URLRequest = new URLRequest("http://www.facential.com/_scripts/facConn.php");
 				var params:URLVariables = new URLVariables();// create and set the variables passed to the server script
 					params.username = loginTextbox.text;
 					params.password = passwordTextbox.text;
@@ -211,9 +211,10 @@ package  com.facential {
 		private function onPostComplete (e:Event):void {
 
 			var returnString:String = e.target.data;
+			
 				returnArray = returnString.split(",");
 				
-				if (returnArray[0] == "Active") {
+				if (returnArray[0] == "active") {
 					
 					dispatchEvent(logINsuccessEv);
 					returnArray.shift();
