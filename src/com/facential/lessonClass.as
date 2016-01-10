@@ -1,7 +1,7 @@
 ﻿/**********************************************************************************************************************************/
 /******           Class written by Tim Lanham   copyright Facential,LLC   2016  all rights reserved                           *****/
 /******           This is the main class file that controls the lessons. Most stage assetts are called                        *****/
-/******           from this class.      Last edit 12/22/15                                                                    *****/
+/******           from this class.      Last edit 1/10/16                                                                    *****/
 /******                                                                                                                       *****/
 /**********************************************************************************************************************************/
 
@@ -54,21 +54,18 @@ package  com.facential{
 		private function init (evt:Event):void {
 				
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-					
+			
 			var xfile:File = File.applicationStorageDirectory.resolvePath("lessons/" + Tobj.Xvideo);
 			lessonPrefix = Tobj.Xvideo.substr(0,3);
 			convertedTakesArray.length = 0;
 	
-			if(loadBox1){ loadBox1.removeBoxer(); removeChild(loadBox1); }
+			/*if(loadBox1){ loadBox1.removeBoxer(); removeChild(loadBox1); trace("loadBox 1 exihsts"); }
 				
-			if(loadBox2){ loadBox2.removeBoxer(); removeChild(loadBox2); }
+			if(loadBox2){ loadBox2.removeBoxer(); removeChild(loadBox2); trace("loadBox 2 exihsts"); }
 			
-			if(loadBox3){loadBox3.removeBoxer(); removeChild(loadBox3); }
+			if(loadBox3){loadBox3.removeBoxer(); removeChild(loadBox3);trace("loadBox 3 exihsts");  }
 			
- 			if(explainationBoxButton) {
-			
-			
-				trace("**********************************");
+ 			if(xPlain) {  trace("clear explain");  }
 				
 				removeChild(explainationBoxButton);
 				explainationBoxButton.removeEventListener(MouseEvent.CLICK, explainationButtonHandler);
@@ -116,7 +113,7 @@ package  com.facential{
 			addChild(explainationBoxButton);
 		
 		
-			rehearseButton = new Button();
+			/*rehearseButton = new Button();
 			rehearseButton.toggle = true;
 			rehearseButton.width = 156;
 			rehearseButton.height = 20;
@@ -124,7 +121,7 @@ package  com.facential{
 			rehearseButton.move(538, 730);
 			rehearseButton.addEventListener(MouseEvent.CLICK, rehearseButtonHandler);
 			rehearseButton.enabled = false;
-			addChild(rehearseButton);
+			addChild(rehearseButton);*/
 			
 			
 			nextButton = new Button();
@@ -164,13 +161,15 @@ package  com.facential{
 
 		private function lessonHandeler(event:Event):void {
 			
+			lessonProgressBar.setProgress(1,Tobj.lessons.length);
+			trace("in lesson handeler");
+			
 			xPlain.stopVideo(); // stops the explaination video
 			xPlain.minimizeBoxer(); // minimizes xPlaination box
             explainationBoxButton.label = "Click to view explaination";
 			explainationBoxButton.selected = false;
 			explainationBoxButton.enabled = true;
-			if (Tobj.topicType == "regular") 
-			rehearseButton.enabled = true; else rehearseButton.enabled = false;
+			//if (Tobj.topicType == "regular") rehearseButton.enabled = true; else rehearseButton.enabled = false;
 			nextButton.enabled = true;
 			rehearseMode  = false;
 			
@@ -282,13 +281,13 @@ package  com.facential{
 			if(loadBox3)loadBox3.removeBoxer();
 			lessonMover(lessonNumberSelected +1);
 			lessonNumberSelected++;
-			trace("the lessonNumberSelected is "+(lessonNumberSelected-1));
+			lessonProgressBar.setProgress((lessonNumberSelected+1),Tobj.lessons.length);
 			modulesCB.prompt = Tobj.lessons[lessonNumberSelected]; 
 
 	 	} // end of nextButtonHandler
 		
 		 	 
-		public function prevButtonHandler(evt:Event):void{ 
+		public function prevButtonHandler (evt:Event):void{ 
 		
 			if (lessonNumberSelected == 1) prevButton.enabled = false; else prevButton.enabled = true;
 			nextButton.enabled = true;
@@ -297,6 +296,7 @@ package  com.facential{
 			if(loadBox3)loadBox3.removeBoxer();
 		 	lessonMover(lessonNumberSelected -1);
 			lessonNumberSelected--;
+			lessonProgressBar.setProgress((lessonNumberSelected+1),Tobj.lessons.length);
 			modulesCB.prompt = Tobj.lessons[lessonNumberSelected]; 
 			
 		}// end of prevButtonHandler
@@ -359,7 +359,8 @@ package  com.facential{
 			
 		} // end of lessonMover
 				
-		
+
+
 		function playLoadBox2 (e:Event):void {
 			
 			if (rehearseMode == false){

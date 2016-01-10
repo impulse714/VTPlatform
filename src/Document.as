@@ -1,5 +1,5 @@
 ﻿/***********************************************************************************************************************/
-/*****                       Prodigy application written by Tim Lanham   latest mod  12/22/2015                     ****/
+/*****                       Prodigy application written by Tim Lanham   latest mod  1/1/2016                    ****/
 /*****                        Main document class for the application.                                              ****/
 /*****                    Copyright  Facential, LLC   2016   all rights reserved                                    ****/
 /*****                   This is now on github and all modification are now tracked.                                ****/
