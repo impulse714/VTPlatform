@@ -54,8 +54,7 @@ package  com.facential{
 		private function init (evt:Event):void {
 				
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			
-			var xfile:File = File.applicationStorageDirectory.resolvePath("lessons/" + Tobj.Xvideo);
+
 			lessonPrefix = Tobj.Xvideo.substr(0,3);
 			convertedTakesArray.length = 0;
 	
@@ -148,9 +147,9 @@ package  com.facential{
 			lessonProgressBar.height = 20;
 			lessonProgressBar.width = 800;
 			lessonProgressBar.mode = ProgressBarMode.MANUAL;
-			lessonProgressBar.setProgress(0,Tobj.lessons.length);
         	addChild(lessonProgressBar);
-	
+			
+	        var xfile:File = File.applicationStorageDirectory.resolvePath("lessons/" + Tobj.Xvideo);
 			xPlain = new boxerClass(Tobj.Xheader,Tobj.Xtext,xfile.url,0,"BIG"); // add new explaination to the stage
 			xPlain.x = 40;
 			xPlain.y = 160;
@@ -159,23 +158,19 @@ package  com.facential{
 		}// end of init			
 			
 
-		private function lessonHandeler(event:Event):void {
-			
-			lessonProgressBar.setProgress(1,Tobj.lessons.length);
-			trace("in lesson handeler");
+		private function lessonHandeler (event:Event):void {
 			
 			xPlain.stopVideo(); // stops the explaination video
 			xPlain.minimizeBoxer(); // minimizes xPlaination box
             explainationBoxButton.label = "Click to view explaination";
 			explainationBoxButton.selected = false;
 			explainationBoxButton.enabled = true;
-			//if (Tobj.topicType == "regular") rehearseButton.enabled = true; else rehearseButton.enabled = false;
 			nextButton.enabled = true;
-			rehearseMode  = false;
 			
-			if (modulesCB.selectedIndex == 0) prevButton.enabled = false; 
+			if (modulesCB.selectedIndex == 0) 
+				prevButton.enabled = false; 
 			else
-			prevButton.enabled = true;
+				prevButton.enabled = true;
 
 			if(loadBox1)loadBox1.removeBoxer();
 			if(loadBox2)loadBox2.removeBoxer();
@@ -183,6 +178,9 @@ package  com.facential{
 			
 			lessonNumberSelected = modulesCB.selectedIndex;
             lessonMover(lessonNumberSelected);
+			lessonProgressBar.setProgress(lessonNumberSelected+1,Tobj.lessons.length);
+			
+			if (lessonNumberSelected +1 == Tobj.lessons.length) nextButton.enabled = false;
 				
 		}  // end of moduleHandeler			
 		
@@ -238,7 +236,7 @@ package  com.facential{
 	  	} // end of explainationButtonHandler	
 		
 	
-		public function killEverything():void {
+		public function killEverything ():void {
 			
 			xPlain.removeBoxer();
 			removeChild(xPlain);
@@ -250,11 +248,14 @@ package  com.facential{
 			removeChild(loadBox3);}
 			removeChild(modulesCB);
 			removeChild(explainationBoxButton);
+			removeChild(lessonProgressBar);
+			removeChild(nextButton);
+			removeChild(prevButton);
 			
 		} // end of killEverything
 		
 	   
-	   	public function rehearseButtonHandler(evt:Event):void{
+	   	public function rehearseButtonHandler (evt:Event):void{
 			
 			if(evt.target.selected==false){
 				rehearseMode = false;
