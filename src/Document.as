@@ -1,5 +1,5 @@
 ﻿/***********************************************************************************************************************/
-/*****                       Prodigy application written by Tim Lanham   latest mod  1/10/2016                      ****/
+/*****                       Prodigy application written by Tim Lanham   latest mod  1/12/2016                      ****/
 /*****                        Main document class for the application.                                              ****/
 /*****                    Copyright  Facential, LLC   2016   all rights reserved                                    ****/
 /*****                   This is now on github and all modification are now tracked.                                ****/
@@ -25,7 +25,7 @@ package  {
 	import flash.desktop.NativeApplication;
 	import air.net.*;
 
-	[SWF(width=1280,height=790, frameRate='60',backgroundColor="0x999999")]	
+	[SWF(width=1280,height=770, frameRate='60',backgroundColor="0x999999")]	
 	
 	public class Document extends MovieClip {
 		
@@ -87,22 +87,15 @@ package  {
 			SB.x=1060;
 			top.addChild(SB);
 			
-			
+			trace(SB.xBoxstatus);
+					
 			var dl_btn:downLoad = new downLoad();
 			dl_btn.addEventListener(MouseEvent.CLICK, downloadHandeler);
 			if (login.returnArray == null) dl_btn.visible = false;
+			dl_btn.x = 300;
+			dl_btn.y = 45;
 			addChild(dl_btn);
 			
-			/*camMinMaxBtn = new Button();
-   			camMinMaxBtn.label = "Deactivate camera and playback"; 
-			camMinMaxBtn.width = 300;
-   			camMinMaxBtn.selected = true;    
-			camMinMaxBtn.toggle = true;  
-  			camMinMaxBtn.addEventListener(MouseEvent.CLICK,camMinMax);
-			camMinMaxBtn.move(920,18);
-			camMinMaxBtn.visible = false;
-			bottom.addChild(camMinMaxBtn);*/
-	
 			if (!webcamRecorder) {
 				
 				webcamRecorder = new videoClass();
@@ -159,13 +152,12 @@ package  {
 		} // end of loggedIN
 		
 		
-		
 	function downloadHandeler (e:MouseEvent):void {
 			
 		FACdownLoader = new fileGetter(login.returnArray);
 		FACdownLoader.addEventListener("DOWNLOAD_IS_COMPLETE", downloadComplete);
-		FACdownLoader.x = 0;
-		FACdownLoader.y = 0;
+		FACdownLoader.x = 475;
+		FACdownLoader.y = 300;
 		addChild(FACdownLoader);
 		
 	} // end of logoHandeler
@@ -177,7 +169,6 @@ package  {
 	}
 			
 	
-		
 	private function processTopicFile (event:Event):void { // Processes the topic file 
   		
 			topicNames.push(event.target.data.topicName); // keep adding the lesson name to the array  to be displayed
@@ -212,6 +203,8 @@ package  {
 	
 	private function processTopic (event:Event):void {
 		
+		trace(SB.xBoxstatus);
+		
 		if (lessons) lessons.killEverything();
 		
 			var dataObject:Object = {topicName:String,
@@ -245,32 +238,6 @@ package  {
 			var _isEditable:String = event.target.data.isEditable;
 				dataObject.isEditable = _isEditable;
 				
-			var _viewTopicX:String = event.target.data.viewTopicX;
-			
-				if (_viewTopicX == "yes") {
-			
-					dataObject.viewTopicX = true;
-					
-				} else {
-			
-					dataObject.viewTopicX = false;
-				
-				}
-				
-								
-			var _viewLessonX:String = event.target.data.viewLessonX;
-			
-				if (_viewLessonX == "yes") {
-			
-					dataObject.viewLessonX = true;
-					
-				} else {
-			
-					dataObject.viewLessonX = false;
-				
-				}			
-		
-
 			var _Xheader:String = event.target.data.Xheader;
 				dataObject.Xheader = _Xheader;	
 				
@@ -411,29 +378,6 @@ package  {
 	} // end of onFileSaved
 			
 		
-	function camMinMax (e:MouseEvent):void {
-
-    	if(e.target.selected==true){  
-					
-			camMinMaxBtn.label = "Deactivate camera and playback";
-			
-			webcamRecorder.maximizeRecorderAssets();
-			playBack.maximizePlaybackAssets();
-			webcamRecorder.visible = true;
-			playBack.visible = true;
-			
-    	} else {  
-					
-			camMinMaxBtn.label = "Activate camera and playback";
-			
-			webcamRecorder.minimizeRecorderAssets();
-			if (playBack)playBack.minimizePlaybackAssets()
-		
-    	} // end of if / else
-			
-	} // end of camMinMax
-		
-		
 	function closeApplication (e:Event):void{
 				
 		e.preventDefault(); 
@@ -457,41 +401,6 @@ package  {
 		removeChild(noNetworkMbx);
 		
 	} // end of cancelNetwork
-	
-	
-	/*function onRelogin(e:Event):void{
-		
-		NativeApplication.nativeApplication.exit();
-		
-	} // end of onRelogin
-	
-		
-	function loggedOUT (e:Event):void{
-		
-		e.preventDefault(); 
-		exitBox = new messageBoxClass("Exit",
-		"Are you sure you want to logout and exit?      Your work will automatically be saved.", "Cancel", "Logout","Logout");
-		
-		exitBox.addEventListener("CANCEL", onCancel);
-		exitBox.addEventListener("RELOGIN", onRelogin);
-		
-		addChild(exitBox);
-		
-	} // end of loggedout
-	
-	
-	private function downloadHandeler (ev:Event):void{
-
-		cleanArray.splice(0,cleanArray.length);
-		availableTopics.splice(0,availableTopics.length);
-		topicNames.splice(0,topicNames.length);
-
-		removeChild(topicsCB);
-		removeChild(FACdownLoader);
-		loggedIN(null);
-			
-	} // end of downloadHandeler*/
-
 
 	} // end of class definition
 	

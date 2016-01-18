@@ -13,12 +13,13 @@
 		var downloadBtn:Button;
 		var spt:Sprite;
 		var sbMinMaxBtn:Button;
-		var topicXbox:CheckBox;
+		public var topicXbox:CheckBox;
 		var lessonXbox:CheckBox;
 		var clearDirectoryBtn:Button;
 		var FACdownLoader:fileGetter;
 		var dArray:Array
 		var aList:List;
+		public var xBoxstatus:Boolean;
 
 		public function sideBarClass (_dArray:Array) {
 			
@@ -67,14 +68,6 @@
 			clearDirectoryBtn.move(50,705);
 			clearDirectoryBtn.addEventListener(MouseEvent.CLICK, clearBtnHandeler);
 			spt.addChild(clearDirectoryBtn);
-			
-			/*downloadBtn = new Button();
-			downloadBtn.label = "Download Topics";
-			downloadBtn.width = 100;
-			downloadBtn.move(50,655);
-			downloadBtn.addEventListener(MouseEvent.CLICK, downloadHandeler);
-			if (dArray == null) downloadBtn.enabled = false;
-			spt.addChild(downloadBtn);*/
 			
 			sbMinMaxBtn = new Button();
 			sbMinMaxBtn.toggle = true;
@@ -129,6 +122,8 @@
 		function TboxClick (e:Event):void {
 				
 				trace("topic boxclick worked");
+				
+				xBoxstatus = true;
 			}
 			
 			

@@ -28,7 +28,7 @@ package  com.facential{
 		var loadBox2:boxerClass;
 		var loadBox3:boxerClass;
 		var Tobj:Object;
-		var modulesCB:ComboBox; // ComboBox with list of modules inside of each lesson
+		var modulesCB:ComboBox; 
 		var convertedTakesArray:Array = new Array;
 		var lessonPrefix:String;
 		var explainationBoxButton:Button;
@@ -41,6 +41,7 @@ package  com.facential{
 		var lessonNumberSelected:int;
 		var rehearseMode:Boolean = false;
 		var lessonProgressBar:ProgressBar;
+		var lessonText:TextField = new TextField();
 
 		
 	public function lessonClass (_Tobj:Object) { // lessonClass constructor
@@ -58,31 +59,6 @@ package  com.facential{
 			lessonPrefix = Tobj.Xvideo.substr(0,3);
 			convertedTakesArray.length = 0;
 	
-			/*if(loadBox1){ loadBox1.removeBoxer(); removeChild(loadBox1); trace("loadBox 1 exihsts"); }
-				
-			if(loadBox2){ loadBox2.removeBoxer(); removeChild(loadBox2); trace("loadBox 2 exihsts"); }
-			
-			if(loadBox3){loadBox3.removeBoxer(); removeChild(loadBox3);trace("loadBox 3 exihsts");  }
-			
- 			if(xPlain) {  trace("clear explain");  }
-				
-				removeChild(explainationBoxButton);
-				explainationBoxButton.removeEventListener(MouseEvent.CLICK, explainationButtonHandler);
-				removeChild(rehearseButton);
-				rehearseButton.removeEventListener(MouseEvent.CLICK, rehearseButtonHandler);
-				removeChild(prevButton);
-				prevButton.removeEventListener(MouseEvent.CLICK, prevButtonHandler);
-				removeChild(nextButton);
-				nextButton.removeEventListener(MouseEvent.CLICK, nextButtonHandler);
-				removeChild(modulesCB);
-				modulesCB.removeEventListener(Event.CHANGE,lessonHandeler);
-				xPlain.removeBoxer();
-				removeChild(xPlain);
-				removeChild(lessonProgressBar);
-				
-			} // end of if to remove assets*/
-		
-			
 			for (var l:String in Tobj.vrTakes) { // converts takes to appPath 
 				
 				var tkfile:File = File.applicationStorageDirectory.resolvePath("lessons/" + Tobj.vrTakes[l]);
@@ -123,32 +99,43 @@ package  com.facential{
 			addChild(rehearseButton);*/
 			
 			
+						
+			lessonText.border = true;
+ 			lessonText.borderColor = 0x000000;
+			lessonText.x = 40;
+			lessonText.y = 730;
+			lessonText.width = 150;		
+			lessonText.height = 18;		
+			lessonText.background = true;
+			lessonText.backgroundColor = 0Xffffff;
+			addChild(lessonText);
+			
 			nextButton = new Button();
-			nextButton.width = 156;
+			nextButton.width = 120;
 			nextButton.height = 20;
 			nextButton.label = "Next Lesson";
-			nextButton.move(338, 730);
+			nextButton.move(210, 730);
 			nextButton.addEventListener(MouseEvent.CLICK, nextButtonHandler);
 			nextButton.enabled = false;
 			addChild(nextButton);
 			
 			prevButton = new Button();
-			prevButton.width = 156;
+			prevButton.width = 120;
 			prevButton.height = 20;
 			prevButton.label = "Previous Lesson";
-			prevButton.move(138, 730);
+			prevButton.move(350, 730);
 			prevButton.addEventListener(MouseEvent.CLICK, prevButtonHandler);
 			prevButton.enabled = false;
 			addChild(prevButton);
 			
 			lessonProgressBar = new ProgressBar();
-        	lessonProgressBar.x = 185;
-        	lessonProgressBar.y = 760;
-			lessonProgressBar.height = 20;
-			lessonProgressBar.width = 800;
+        	lessonProgressBar.x = 480;
+        	lessonProgressBar.y = 730;
+			lessonProgressBar.height = 18;
+			lessonProgressBar.width = 350;
 			lessonProgressBar.mode = ProgressBarMode.MANUAL;
         	addChild(lessonProgressBar);
-			
+		
 	        var xfile:File = File.applicationStorageDirectory.resolvePath("lessons/" + Tobj.Xvideo);
 			xPlain = new boxerClass(Tobj.Xheader,Tobj.Xtext,xfile.url,0,"BIG"); // add new explaination to the stage
 			xPlain.x = 40;
@@ -179,7 +166,7 @@ package  com.facential{
 			lessonNumberSelected = modulesCB.selectedIndex;
             lessonMover(lessonNumberSelected);
 			lessonProgressBar.setProgress(lessonNumberSelected+1,Tobj.lessons.length);
-			
+			lessonText.text =Tobj.lessons[lessonNumberSelected];
 			if (lessonNumberSelected +1 == Tobj.lessons.length) nextButton.enabled = false;
 				
 		}  // end of moduleHandeler			
@@ -251,6 +238,7 @@ package  com.facential{
 			removeChild(lessonProgressBar);
 			removeChild(nextButton);
 			removeChild(prevButton);
+			removeChild(lessonText);
 			
 		} // end of killEverything
 		
@@ -284,6 +272,7 @@ package  com.facential{
 			lessonNumberSelected++;
 			lessonProgressBar.setProgress((lessonNumberSelected+1),Tobj.lessons.length);
 			modulesCB.prompt = Tobj.lessons[lessonNumberSelected]; 
+			lessonText.text =Tobj.lessons[lessonNumberSelected];
 
 	 	} // end of nextButtonHandler
 		
@@ -299,6 +288,7 @@ package  com.facential{
 			lessonNumberSelected--;
 			lessonProgressBar.setProgress((lessonNumberSelected+1),Tobj.lessons.length);
 			modulesCB.prompt = Tobj.lessons[lessonNumberSelected]; 
+			lessonText.text =Tobj.lessons[lessonNumberSelected];
 			
 		}// end of prevButtonHandler
 

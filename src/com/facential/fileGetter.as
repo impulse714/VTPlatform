@@ -32,19 +32,18 @@
 		var chooseDownload:ComboBox;
 		var fileDownload:Sprite;
 		var CBdata:Array;
-		var directoryString = "http://www.hotshotrecords.us/downloads/";
+		var directoryString = "http://www.facential.com/downloads/";
 		var tempStringFile:String;
 		var inArray:Array = new Array();
 		var _DLdirectory:String;
 		var array:Array = new Array();
+		var exitDLbutton:Button;
 										  
 		var demoArray:Array = new Array ("pst.fac","pstExplanation.mp4","pstPrompt1.mp4",
 										"pstPrompt2.mp4","pstPrompt3.mp4","pstPrompt4.mp4","pstPrompt5.mp4","brain.jpg");				   
 		  
 							
 		public function fileGetter (_array:Array) {
-			
-			trace("in filegetter "+_array);
 		
 			array = _array;
 			outerBkgdBox = new Shape; // initializing the first box
@@ -62,17 +61,25 @@
 			completedText = new TextField();
 			completedText.width = 300;
 			completedText.x = 110;
-			completedText.y = 60;
+			completedText.y = 55;
  			addChild(completedText);	
 			
 			progressBar = new ProgressBar();
         	progressBar.x = 85;
-        	progressBar.y = 90;
+        	progressBar.y = 80;
 			progressBar.height = 10;
 			progressBar.width = 200;
 			progressBar.visible = false;
         	addChild(progressBar);
 			
+			exitDLbutton = new Button();  // add camera toggle button
+			exitDLbutton.label = "Exit";
+			exitDLbutton.buttonMode = true;
+			exitDLbutton.x = 150;
+			exitDLbutton.y = 95;
+			exitDLbutton.addEventListener(MouseEvent.CLICK,exitDLbuttonHandler);
+			if (array == null) exitDLbutton.visible = false;
+			addChild(exitDLbutton);
 		
 			if (array !=null){
 				
@@ -111,7 +118,7 @@
 		} // end of constructor
 		
 		
-		private function downloadComplete2():void {
+		private function downloadComplete2 ():void {
 			
 			for (var j:String in inArray) {
 			
@@ -122,6 +129,13 @@
 			}
 			
 		} // end of downloadComplete2
+		
+		
+		private function exitDLbuttonHandler (e:Event):void {
+		
+			dispatchEvent(downloadCompleteEvent);
+		
+		}
 		
 		
 		private function processTemp (e:Event):void {
@@ -144,16 +158,15 @@
 				finalArray.push(_Xvideo);
 				
 			} else if (_topicType == "dual") {
-				
-				var _Qmovies = e.target.data.Qmovies.split(",");
-				finalArray = _Pmovies.concat(_Qmovies);
+				trace("in dual");
+				var _RMmovies = e.target.data.RMmovies.split(",");
+				finalArray = _Pmovies.concat(_RMmovies);
 				finalArray.push(_Xvideo);
 				
 			} else {
 				finalArray = _Pmovies;
 				finalArray.push(_Xvideo);
 			}
-			
 			
 			chooseDownload.addItem ({label:_topicName,DLdir:_DLdirectory.toUpperCase(),DLarray:finalArray});
 			
