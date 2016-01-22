@@ -290,7 +290,7 @@ package  {
 				
 		} // end of try catch
 		
-		lessons = new lessonClass(dataObject);
+		lessons = new lessonClass(dataObject,SB.xBoxstatus);
  		bottom.addChild(lessons);
 		
 		//camMinMaxBtn.visible = true;

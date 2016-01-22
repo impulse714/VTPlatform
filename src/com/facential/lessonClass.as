@@ -42,11 +42,14 @@ package  com.facential{
 		var rehearseMode:Boolean = false;
 		var lessonProgressBar:ProgressBar;
 		var lessonText:TextField = new TextField();
+		var viewer:Boolean;
 
 		
-	public function lessonClass (_Tobj:Object) { // lessonClass constructor
+	public function lessonClass (_Tobj:Object,_viewer:Boolean) { // lessonClass constructor
 		   
 		Tobj = _Tobj;
+		viewer = _viewer;
+		
 		addEventListener(Event.ADDED_TO_STAGE, init);
 
 	} // end of constructor
@@ -82,6 +85,7 @@ package  com.facential{
 			explainationBoxButton.toggle = true;
 			explainationBoxButton.label = "Click to minimize explaination";
 			explainationBoxButton.width = 350;
+			
 			explainationBoxButton.move(400, 125);
 			explainationBoxButton.addEventListener(MouseEvent.CLICK, explainationButtonHandler);
 			explainationBoxButton.enabled = false;
@@ -134,6 +138,7 @@ package  com.facential{
 			lessonProgressBar.height = 18;
 			lessonProgressBar.width = 350;
 			lessonProgressBar.mode = ProgressBarMode.MANUAL;
+			lessonProgressBar.setStyle("barSkin", mySkin);
         	addChild(lessonProgressBar);
 		
 	        var xfile:File = File.applicationStorageDirectory.resolvePath("lessons/" + Tobj.Xvideo);
@@ -141,6 +146,11 @@ package  com.facential{
 			xPlain.x = 40;
 			xPlain.y = 160;
 			addChild(xPlain);
+			/*if(viewer) {
+				xPlain.visible = false;
+				xPlain.stopVideo();
+				lessonHandeler(null);
+			}*/
      
 		}// end of init			
 			
@@ -325,7 +335,7 @@ package  com.facential{
 			} else if (Tobj.topicType == "dual"){
 			
 				afile = File.applicationStorageDirectory.resolvePath("lessons/" + Tobj.Pmovies[lessonIndex]);
-            	loadBox1 = new boxerClass(Tobj.Pheader,Tobj.prompts[lessonIndex],afile.url,0,"SMALL");
+            	loadBox1 = new boxerClass(Tobj.Pheader,Tobj.prompts[lessonIndex],afile.url,1,"SMALL");
 				loadBox1.x = 30;
 				loadBox1.y = 165;
 				loadBox1.addEventListener("THE_VIDEO_IS_COMPLETE", playLoadBox2);

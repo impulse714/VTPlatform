@@ -130,7 +130,7 @@ package  com.facential{
 				
 				videoBkgdBox = new Shape; // initializing the first box
 				videoBkgdBox.graphics.beginFill(0x666666); // choosing the colour for the fill (grey)
-				videoBkgdBox.graphics.drawRoundRect(videoBkgdBoxX,videoBkgdBoxY, videoBkgdBoxW, videoBkgdBoxH, 15, 15) // (x, y, width, height, )
+				videoBkgdBox.graphics.drawRoundRect(videoBkgdBoxX,videoBkgdBoxY, videoBkgdBoxW, videoBkgdBoxH, 15, 15) //(x,y,wdh,height, )
 				videoBkgdBox.graphics.endFill(); // not always needed but I like to put it in to end the fill
 				addChild(videoBkgdBox);
 			
@@ -148,7 +148,7 @@ package  com.facential{
 				
 				if (boxType == 0) bodyTextBox.defaultTextFormat =  explainationBodyFormat
 				else bodyTextBox.defaultTextFormat = promptBodyFormat;
-					
+				
 				bodyTextBox.scrollV = bodyTextBox.maxScrollV;
 				bodyTextBox.text = body; 
 				bodyTextBox.width = headBodyW;    
@@ -166,7 +166,7 @@ package  com.facential{
 				bodyTextSlider.direction = SliderDirection.VERTICAL;
 				bodyTextSlider.liveDragging = true;
 				bodyTextSlider.addEventListener(Event.CHANGE, sliderChanged);
-				if (boxSize == "BIG") bodyTextSlider.visible = false;
+				//if (boxSize == "BIG") bodyTextSlider.visible = false;
 				addChild(bodyTextSlider);
 				
 				theVideo = new ApdevVideoPlayer(videoH, videoW);
@@ -265,7 +265,7 @@ package  com.facential{
 			theVideo.visible = true;
 			headerTextBox.visible = true;
 			bodyTextBox.visible = true;
-			if (boxSize != "BIG") bodyTextSlider.visible = true;
+			//if (boxSize != "BIG") bodyTextSlider.visible = true;
 			videoBkgdBox.visible = true;
 			setCuePtBtn.visible = true;
 			gotoCuePtBtn.visible = true;
