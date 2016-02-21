@@ -86,8 +86,6 @@ package  {
 			SB = new sideBarClass(login.returnArray);
 			SB.x=1060;
 			top.addChild(SB);
-			
-			trace(SB.xBoxstatus);
 					
 			var dl_btn:downLoad = new downLoad();
 			dl_btn.addEventListener(MouseEvent.CLICK, downloadHandeler);
@@ -203,8 +201,6 @@ package  {
 	
 	private function processTopic (event:Event):void {
 		
-		trace(SB.xBoxstatus);
-		
 		if (lessons) lessons.killEverything();
 		
 			var dataObject:Object = {topicName:String,
@@ -290,7 +286,7 @@ package  {
 				
 		} // end of try catch
 		
-		lessons = new lessonClass(dataObject,SB.xBoxstatus);
+		lessons = new lessonClass(dataObject,SB.xBoxstatus,SB.lBoxstatus);
  		bottom.addChild(lessons);
 		
 		//camMinMaxBtn.visible = true;

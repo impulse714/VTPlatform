@@ -14,12 +14,15 @@
 		var spt:Sprite;
 		var sbMinMaxBtn:Button;
 		public var topicXbox:CheckBox;
-		var lessonXbox:CheckBox;
+		public var xBoxstatus:Boolean = true;
+		public var lessonXbox:CheckBox;
+		public var lBoxstatus:Boolean = true;
+		public var sbLessonIndex:int;
 		var clearDirectoryBtn:Button;
 		var FACdownLoader:fileGetter;
 		var dArray:Array
 		var aList:List;
-		public var xBoxstatus:Boolean;
+		
 
 		public function sideBarClass (_dArray:Array) {
 			
@@ -87,12 +90,16 @@
 			
 			aList.addEventListener(Event.CHANGE, changeHandler); 
 			
-			function changeHandler(event:Event):void { 
-   				 trace(event.target.selectedIndex); 
-			}
+
 
 		} // end of init
 		
+		
+		function changeHandler(event:Event):void { 
+		
+			sbLessonIndex = event.target.selectedIndex;
+   				 
+		}
 		
 		public function add2list(addLessons:Array):void {
 			
@@ -121,25 +128,30 @@
 			
 		function TboxClick (e:Event):void {
 				
-				trace("topic boxclick worked");
-				
+			if (xBoxstatus) 
+				xBoxstatus = false;
+			else
 				xBoxstatus = true;
-			}
+				
+		}// end of TboxClick
 			
 			
 		function LboxClick (e:Event):void {
 				
-				trace("lesson boxclick worked");
-			}
+			if (lBoxstatus)
+				lBoxstatus = false;
+			else 
+				lBoxstatus = true;
+				
+		}// end of LboxClick
 			
 			
 		function clearBtnHandeler (e:MouseEvent):void{
 
-				var prodigy:File = File.applicationStorageDirectory;
-					prodigy.deleteDirectory(true);
-					trace("The prodigy directory was deleted");
+			var prodigy:File = File.applicationStorageDirectory;
+				prodigy.deleteDirectory(true);
 
-			}// clearBtnHandeler
+		}// clearBtnHandeler
 			
 			
 		function downloadHandeler (e:MouseEvent):void {
@@ -150,13 +162,14 @@
 			FACdownLoader.y = 0;
 			addChild(FACdownLoader);
 		
-		} // end of logoHandeler
+		} // end of downloadHandeler
 			
 
 		function downloadComplete (e:Event):void {
 		
 			removeChild(FACdownLoader);
-		}
+			
+		}// end of downloadComplete
 		
 
 	}// end of class

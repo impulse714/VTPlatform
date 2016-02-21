@@ -42,13 +42,15 @@ package  com.facential{
 		var rehearseMode:Boolean = false;
 		var lessonProgressBar:ProgressBar;
 		var lessonText:TextField = new TextField();
-		var viewer:Boolean;
+		var Xviewer:Boolean;
+		var Lviewer:Boolean;
 
 		
-	public function lessonClass (_Tobj:Object,_viewer:Boolean) { // lessonClass constructor
+	public function lessonClass (_Tobj:Object,_Xviewer:Boolean,_Lviewer:Boolean) { // lessonClass constructor
 		   
 		Tobj = _Tobj;
-		viewer = _viewer;
+		Xviewer = _Xviewer;
+		Lviewer = _Lviewer;
 		
 		addEventListener(Event.ADDED_TO_STAGE, init);
 
